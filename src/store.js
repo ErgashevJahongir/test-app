@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { api } from "./instance";
-import weatherReducer from "./reducer/weatherReducer";
+import weatherReducer from "./reducer/weatherSlice";
 
 export default configureStore({
   reducer: {
-    weatherReducer,
+    weather: weatherReducer,
   },
-  middleware: [api],
 });

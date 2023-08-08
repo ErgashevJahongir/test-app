@@ -1,31 +1,35 @@
-import weatherReducer, { getWeatherWithCity } from "./reducer/weatherReducer";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { getWeather, selectWeather } from "./reducer/weatherSlice";
 
-function WeatherApp({ weatherReducer, getWeatherWithCity }) {
+function WeatherApp() {
+  const dispatch = useDispatch();
+  const weather = useSelector(selectWeather);
+
   useEffect(() => {
-    getWeatherWithCity("Tashkent");
+    dispatch(getWeather("Tashkent"));
   }, []);
-
-  console.log(weatherReducer.weatherData);
 
   return (
     <section className="container">
       <div className="content">
-        <h1>35°</h1>
+        <h1>{Math.round(weather?.main?.temp)}°</h1>
         <div className="content__city">
-          <h3>Toshkent Shahri</h3>
+          <h3>{weather?.name}</h3>
           <span>10:36 - Tuesday, 22 Oct 19</span>
         </div>
         <div className="weather__image">
           <div>
-            <img src="https://openweathermap.org/img/wn/01d@4x.png" alt="sun" />
+            <img
+              src={`https://openweathermap.org/img/wn/${weather?.weather[0]?.icon}@4x.png`}
+              alt="sun"
+            />
           </div>
-          <span>Clear</span>
+          <span>{weather?.weather[0]?.main}</span>
         </div>
       </div>
     </section>
   );
 }
 
-export default connect(weatherReducer, { getWeatherWithCity })(WeatherApp);
+export default WeatherApp;

@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getWeather, selectWeather } from "../reducer/weatherSlice";
 
-function Sidebar({ mobileMenu, setMobileMenu }) {
+function Sidebar({ setMobileMenu, mobileMenu }) {
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
+  const weather = useSelector(selectWeather);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -13,6 +17,13 @@ function Sidebar({ mobileMenu, setMobileMenu }) {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
+  function onSubmit(e) {
+    e.preventDefault();
+    const { cityName } = e.target;
+    console.log(cityName.value);
+    dispatch(getWeather(cityName.value));
+  }
 
   return (
     <aside>
@@ -44,8 +55,8 @@ function Sidebar({ mobileMenu, setMobileMenu }) {
           </button>
         </div>
         <div>
-          <form className="search-form">
-            <input type="text" className="search-input" placeholder="Type location" />
+          <form onSubmit={onSubmit} className="search-form">
+            <input type="text" id="cityName" className="search-input" placeholder="Type location" />
             <button type="submit" className="search-button" title="Search">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,19 +126,19 @@ function Sidebar({ mobileMenu, setMobileMenu }) {
           <ul>
             <li>
               <span>Cloudy</span>
-              <span>0%</span>
+              <span>{weather?.clouds?.all}%</span>
             </li>
             <li>
               <span>Humidity</span>
-              <span>18%</span>
+              <span>{weather?.main?.humidity}%</span>
             </li>
             <li>
               <span>Wind</span>
-              <span>3.09 km/h</span>
+              <span>{weather?.wind?.speed} km/h</span>
             </li>
             <li>
               <span>Pressure</span>
-              <span>1003 Pha</span>
+              <span>{weather?.main?.pressure} Pha</span>
             </li>
           </ul>
         </div>
