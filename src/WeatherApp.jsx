@@ -1,4 +1,14 @@
-function WeatherApp() {
+import weatherReducer, { getWeatherWithCity } from "./reducer/weatherReducer";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+
+function WeatherApp({ weatherReducer, getWeatherWithCity }) {
+  useEffect(() => {
+    getWeatherWithCity("Tashkent");
+  }, []);
+
+  console.log(weatherReducer.weatherData);
+
   return (
     <section className="container">
       <div className="content">
@@ -18,4 +28,4 @@ function WeatherApp() {
   );
 }
 
-export default WeatherApp;
+export default connect(weatherReducer, { getWeatherWithCity })(WeatherApp);

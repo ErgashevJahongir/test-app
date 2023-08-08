@@ -150,6 +150,7 @@
   color: white;
   font-size: 16px;
   line-height: 1.5;
+  border-radius: 0;
 }
 
 .search-input::placeholder {
