@@ -1,0 +1,278 @@
+.layout {
+  display: flex;
+  justify-content: space-between;
+  min-width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.mainDiv {
+  width: 100%;
+}
+
+.cloud-light {
+  background-size: cover;
+  background-image: url("../assets/light-cloud.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.cloud-dark {
+  background-size: cover;
+  background-image: url("../assets/dark-cloud.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.rain {
+  background-size: cover;
+  background-image: url("../assets/rain.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.snow {
+  background-size: cover;
+  background-image: url("../assets/snow.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.sunshine {
+  background-size: cover;
+  background-image: url("../assets/sunshine.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  height: 80px;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.navbar__burger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 10px 20px;
+  box-shadow: 0 15px 25px #69686833;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  color: white;
+  border-radius: 5px;
+}
+
+.bars-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.menuOpen.layout aside {
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  z-index: 5;
+}
+
+.menuOpen .sidebarBg {
+  width: 100%;
+  min-height: 100%;
+  position: absolute;
+  z-index: 2;
+  backdrop-filter: blur(5px);
+}
+
+.sidebar {
+  min-width: 270px;
+  backdrop-filter: blur(10px);
+  height: 100%;
+  box-shadow: 0 15px 25px #69686833;
+  background-color: #57575781;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  transition: all 0.3s ease;
+}
+
+.close {
+  right: -400px;
+  display: none;
+}
+
+.open {
+  right: 0 !important;
+  display: block;
+}
+
+.sidebar__close-div {
+  display: block;
+  padding: 10px 0 10px 15px;
+}
+
+.close-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.close-icon {
+  height: 28px;
+  width: 28px;
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  align-items: end;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.322);
+  width: 70%;
+  transition: all 0.3s;
+  height: 40px;
+  padding: 8px 5px;
+  margin: 0 auto;
+  color: white;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.search-input:focus {
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.search-button {
+  padding: 10px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefe3d;
+  width: 50px;
+  height: 50px;
+}
+
+.search-icon {
+  height: 30px;
+  width: 30px;
+  color: white;
+}
+
+.city-content {
+  max-height: 300px;
+  overflow-y: scroll;
+  margin: 15px 20px;
+}
+
+.city-content ul li {
+  color: rgb(223, 223, 223);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 7px 0;
+}
+
+.sideber-hr {
+  margin: 15px 20px;
+}
+
+.deatail-content {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 15px 20px;
+  color: rgb(223, 223, 223);
+}
+
+.deatail-content h3 {
+  font-size: 22px;
+  margin: 4px;
+}
+
+.deatail-content ul li {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 7px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .logo {
+    font-size: 2rem;
+  }
+
+  .navbar__burger {
+    visibility: hidden;
+  }
+
+  .sidebar {
+    min-width: 300px;
+    position: initial;
+  }
+
+  .sidebar__close-div {
+    display: none;
+  }
+
+  .search-input {
+    width: 60%;
+    height: 48px;
+    padding: 12px 5px;
+  }
+
+  .search-button {
+    width: 80px;
+    height: 80px;
+  }
+
+  .search-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .city-content {
+    margin: 24px 30px;
+  }
+
+  .city-content ul li {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+
+  .sideber-hr {
+    margin: 24px 30px;
+  }
+
+  .deatail-content {
+    margin: 24px 30px;
+  }
+
+  .deatail-content h3 {
+    font-size: 24px;
+  }
+
+  .deatail-content ul li {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+}
