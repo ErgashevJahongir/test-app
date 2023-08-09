@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getWeather, selectWeather } from "./reducer/weatherSlice";
+import "./App.css";
 
 function WeatherApp() {
   const dispatch = useDispatch();
   const weather = useSelector(selectWeather);
 
   useEffect(() => {
-    dispatch(getWeather("Tashkent"));
+    dispatch(getWeather("Toshkent"));
   }, []);
 
   return (
@@ -22,7 +23,7 @@ function WeatherApp() {
           <div>
             <img
               src={`https://openweathermap.org/img/wn/${weather?.weather[0]?.icon}@4x.png`}
-              alt="sun"
+              alt="weather icon"
             />
           </div>
           <span>{weather?.weather[0]?.main}</span>

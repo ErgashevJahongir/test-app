@@ -217,6 +217,43 @@
   align-items: center;
 }
 
+.citys{
+  position: absolute;
+  z-index: 10;
+  width: 85%;
+  top: 55px;
+  margin: 0 16px;
+  background: rgb(223, 223, 223);
+  border-radius: 4px;
+  padding: 4px 0;
+}
+
+.citys li{
+  padding: 3px 20px;
+}
+
+.city{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 20px;
+  cursor: pointer;
+}
+
+.city:hover{
+  background: #ccc;
+}
+
+.city .country-icon{
+  width: 20px;
+  height: 15px;
+}
+
+.city .weather-icon{
+  width: 30px;
+  height: 30px;
+}
+
 @media (min-width: 1024px) {
   .logo {
     font-size: 2rem;
@@ -228,7 +265,7 @@
 
   .sidebar {
     min-width: 300px;
-    position: initial;
+    position: inherit;
   }
 
   .sidebar__close-div {
@@ -275,5 +312,8 @@
   .deatail-content ul li {
     font-size: 18px;
     padding: 10px 0;
+  }
+  .citys{
+    top: 85px;
   }
 }

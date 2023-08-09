@@ -42,7 +42,7 @@
   .content {
     margin-top: 50vh;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     text-align: left;
     gap: 30px;
   }

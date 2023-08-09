@@ -1,12 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getWeather, selectWeather } from "../reducer/weatherSlice";
+import {
+  clearCitysWeather,
+  getCitysWeather,
+  getWeatherWithLatLon,
+  selectCitysWeather,
+  selectCitysWeatherMessage,
+  selectWeather,
+} from "../reducer/weatherSlice";
+
+const useFocus = () => {
+  const htmlElRef = useRef(null);
+  const setFocus = () => {
+    htmlElRef.current && htmlElRef.current.focus();
+  };
+
+  return [htmlElRef, setFocus];
+};
 
 function Sidebar({ setMobileMenu, mobileMenu }) {
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   const weather = useSelector(selectWeather);
+  const citysWeather = useSelector(selectCitysWeather);
+  const citysWeatherMessage = useSelector(selectCitysWeatherMessage);
   const dispatch = useDispatch();
+  const [inputRef, setInputFocus] = useFocus();
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -21,23 +41,34 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
   function onSubmit(e) {
     e.preventDefault();
     const { cityName } = e.target;
-    console.log(cityName.value);
-    dispatch(getWeather(cityName.value));
+    dispatch(getCitysWeather(cityName.value));
+  }
+
+  function getWeatherData(lat, lon) {
+    dispatch(getWeatherWithLatLon({ lat, lon }));
+    dispatch(clearCitysWeather());
+    setMobileMenu(false);
+    setInputFocus();
+    setValue("");
   }
 
   return (
     <aside>
-      <div
-        onClick={() => {
-          setMobileMenu(false);
-        }}
-        className="sidebarBg"
-      />
+      {windowSize[0] < 1024 && (
+        <div
+          onClick={() => {
+            setMobileMenu(false);
+            dispatch(clearCitysWeather());
+          }}
+          className="sidebarBg"
+        />
+      )}
       <div className={`sidebar ${windowSize[0] < 1024 ? (mobileMenu ? "open" : "close") : "open"}`}>
         <div className="sidebar__close-div">
           <button
             onClick={() => {
               setMobileMenu(false);
+              dispatch(clearCitysWeather());
             }}
             type="button"
             className="close-button"
@@ -54,9 +85,18 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
             </svg>
           </button>
         </div>
-        <div>
+        <div style={{ position: "relative" }}>
           <form onSubmit={onSubmit} className="search-form">
-            <input type="text" id="cityName" className="search-input" placeholder="Type location" />
+            <input
+              value={value}
+              onChange={e => setValue(e.target.value)}
+              type="text"
+              id="cityName"
+              className="search-input"
+              placeholder="Type location"
+              autoFocus={true}
+              ref={inputRef}
+            />
             <button type="submit" className="search-button" title="Search">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -74,6 +114,40 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
               </svg>
             </button>
           </form>
+          {(citysWeather || citysWeatherMessage) && (
+            <div className="citys">
+              <ul>
+                {citysWeather?.map(item => {
+                  return (
+                    <li
+                      className="city"
+                      key={item.id}
+                      onClick={() => getWeatherData(item?.coord?.lat, item?.coord?.lon)}
+                    >
+                      <span>
+                        {item.name}, {item.sys.country}{" "}
+                        <img
+                          className="country-icon"
+                          src={`https://openweathermap.org/images/flags/${item.sys?.country?.toLowerCase()}.png`}
+                          alt="country flag"
+                        />
+                      </span>
+                      <span>
+                        <img
+                          className="weather-icon"
+                          src={`https://openweathermap.org/img/wn/${item?.weather[0]?.icon}@4x.png`}
+                          alt="weather icon"
+                        />
+                      </span>
+                    </li>
+                  );
+                })}
+                {citysWeatherMessage && (
+                  <li style={{ textAlign: "center" }}>{citysWeatherMessage}</li>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="city-content">
           <ul>
