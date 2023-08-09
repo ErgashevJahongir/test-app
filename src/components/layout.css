@@ -1,15 +1,18 @@
-.city-content::-webkit-scrollbar, .deatail-content::-webkit-scrollbar {
+.city-content::-webkit-scrollbar,
+.deatail-content::-webkit-scrollbar {
   width: 12px;
 }
 
-.city-content::-webkit-scrollbar-track, .deatail-content::-webkit-scrollbar-track  {
-  -webkit-box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+.city-content::-webkit-scrollbar-track,
+.deatail-content::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
 
-.city-content::-webkit-scrollbar-thumb, .deatail-content::-webkit-scrollbar-thumb {
+.city-content::-webkit-scrollbar-thumb,
+.deatail-content::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
+  -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
 }
 
 .layout {
@@ -231,7 +234,7 @@
   align-items: center;
 }
 
-.citys{
+.citys {
   position: absolute;
   z-index: 10;
   width: 85%;
@@ -242,11 +245,11 @@
   padding: 4px 0;
 }
 
-.citys li{
+.citys li {
   padding: 3px 20px;
 }
 
-.city{
+.city {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -254,16 +257,16 @@
   cursor: pointer;
 }
 
-.city:hover{
+.city:hover {
   background: #ccc;
 }
 
-.city .country-icon{
+.city .country-icon {
   width: 20px;
   height: 15px;
 }
 
-.city .weather-icon{
+.city .weather-icon {
   width: 30px;
   height: 30px;
 }
@@ -327,7 +330,7 @@
     font-size: 18px;
     padding: 10px 0;
   }
-  .citys{
+  .citys {
     top: 85px;
   }
 }

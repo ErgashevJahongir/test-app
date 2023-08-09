@@ -1,4 +1,4 @@
-.loading{
+.loading {
   height: 100vh;
   justify-content: center;
   align-items: center;
@@ -15,9 +15,9 @@
 
 @keyframes animloader {
   0% {
-    box-shadow: -72px 0 #FFF inset;
+    box-shadow: -72px 0 #fff inset;
   }
   100% {
-    box-shadow: 48px 0 #FFF inset;
+    box-shadow: 48px 0 #fff inset;
   }
 }
