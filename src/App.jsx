@@ -1,8 +1,9 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import WeatherApp from "./WeatherApp";
 import Loading from "./components/Loading";
+
+const WeatherApp = lazy(() => import("./WeatherApp"));
 
 function App() {
   return (
