@@ -4,21 +4,26 @@ import instance from "../instance";
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_APP_ID;
 
 export const getWeather = createAsyncThunk("weathers/getWeathers", async cityName => {
-  return await instance(`/weather?q=${cityName}&appid=${WEATHER_API_KEY}&lang=en&units=metric`);
+  const res = await instance(
+    `/weather?q=${cityName}&appid=${WEATHER_API_KEY}&lang=en&units=metric`
+  );
+  return res.data;
 });
 
 export const getWeatherWithLatLon = createAsyncThunk(
   "weathers/getWeatherswithLatLon",
   async data => {
     const { lat, lon } = data;
-    return await instance(
+    const res = await instance(
       `/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&lang=en&units=metric`
     );
+    return res.data;
   }
 );
 
 export const getCitysWeather = createAsyncThunk("citysWeathers/getWeathers", async cityName => {
-  return await instance(`/find?q=${cityName}&appid=${WEATHER_API_KEY}&lang=en&units=metric`);
+  const res = await instance(`/find?q=${cityName}&appid=${WEATHER_API_KEY}&lang=en&units=metric`);
+  return res.data;
 });
 
 const initialState = {
@@ -44,7 +49,7 @@ export const weatherSlice = createSlice({
     }),
       builder.addCase(getWeather.fulfilled, (state, action) => {
         state.loading = false;
-        state.weather = action.payload?.data;
+        state.weather = action.payload;
       }),
       builder.addCase(getWeather.rejected, state => {
         state.loading = false;
@@ -55,7 +60,7 @@ export const weatherSlice = createSlice({
     }),
       builder.addCase(getWeatherWithLatLon.fulfilled, (state, action) => {
         state.loading = false;
-        state.weather = action.payload?.data;
+        state.weather = action.payload;
       }),
       builder.addCase(getWeatherWithLatLon.rejected, state => {
         state.loading = false;
@@ -66,11 +71,11 @@ export const weatherSlice = createSlice({
     }),
       builder.addCase(getCitysWeather.fulfilled, (state, action) => {
         state.citysLoading = false;
-        if (Array.isArray(action.payload?.data?.list) && action.payload?.data?.list.length === 0) {
+        if (Array.isArray(action.payload?.list) && action.payload?.data?.list.length === 0) {
           state.citysWeatherMessage = "City not found";
           state.citysWeather = null;
         } else {
-          state.citysWeather = action.payload?.data?.list;
+          state.citysWeather = action.payload?.list;
           state.citysWeatherMessage = null;
         }
       }),

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   clearCitysWeather,
   getCitysWeather,
+  getWeather,
   getWeatherWithLatLon,
   selectCitysWeather,
   selectCitysWeatherMessage,
@@ -27,6 +28,21 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
   const dispatch = useDispatch();
   const [inputRef, setInputFocus] = useFocus();
   const [value, setValue] = useState("");
+  const citys = [
+    "Tashkent",
+    "Samarkand",
+    "Termez",
+    "Qarshi",
+    "Nukus",
+    "Urgench",
+    "Navoiy",
+    "Namangan",
+    "Andijan",
+    "Fergana",
+    "Jizzakh",
+    "Bukhara",
+    "Sirdaryo",
+  ];
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -50,6 +66,11 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
     setMobileMenu(false);
     setInputFocus();
     setValue("");
+  }
+
+  function getWeatherDataWithCityName(cityName) {
+    dispatch(getWeather(cityName));
+    setMobileMenu(false);
   }
 
   return (
@@ -151,45 +172,13 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
         </div>
         <div className="city-content">
           <ul>
-            <li>
-              <Link to="#">Tashkent</Link>
-            </li>
-            <li>
-              <Link to="#">Samarkand</Link>
-            </li>
-            <li>
-              <Link to="#">Surkhandarya</Link>
-            </li>
-            <li>
-              <Link to="#">Kashkadarya</Link>
-            </li>
-            <li>
-              <Link to="#">Karakalpakstan</Link>
-            </li>
-            <li>
-              <Link to="#">Khorezm</Link>
-            </li>
-            <li>
-              <Link to="#">Navoiy</Link>
-            </li>
-            <li>
-              <Link to="#">Namangan</Link>
-            </li>
-            <li>
-              <Link to="#">Andijan</Link>
-            </li>
-            <li>
-              <Link to="#">Fergana</Link>
-            </li>
-            <li>
-              <Link to="#">Jizzakh</Link>
-            </li>
-            <li>
-              <Link to="#">Bukhara</Link>
-            </li>
-            <li>
-              <Link to="#">Sirdaryo</Link>
-            </li>
+            {citys.map((item, index) => {
+              return (
+                <li key={index} onClick={() => getWeatherDataWithCityName(item)}>
+                  <Link to="#">{item}</Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="sideber-hr">
