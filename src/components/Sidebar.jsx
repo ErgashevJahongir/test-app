@@ -64,7 +64,7 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
     dispatch(getWeatherWithLatLon({ lat, lon }));
     dispatch(clearCitysWeather());
     setMobileMenu(false);
-    setInputFocus();
+    windowSize[0] > 1024 && setInputFocus();
     setValue("");
   }
 
@@ -74,7 +74,11 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
   }
 
   return (
-    <aside>
+    <aside
+      onClick={() => {
+        dispatch(clearCitysWeather());
+      }}
+    >
       {windowSize[0] < 1024 && (
         <div
           onClick={() => {
@@ -115,7 +119,7 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
               id="cityName"
               className="search-input"
               placeholder="Type location"
-              autoFocus={true}
+              autoFocus={windowSize[0] >= 1024}
               ref={inputRef}
             />
             <button type="submit" className="search-button" title="Search">

@@ -71,7 +71,7 @@ export const weatherSlice = createSlice({
     }),
       builder.addCase(getCitysWeather.fulfilled, (state, action) => {
         state.citysLoading = false;
-        if (Array.isArray(action.payload?.list) && action.payload?.data?.list.length === 0) {
+        if (Array.isArray(action.payload?.list) && action.payload?.list.length === 0) {
           state.citysWeatherMessage = "City not found";
           state.citysWeather = null;
         } else {
