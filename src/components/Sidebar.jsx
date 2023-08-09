@@ -188,27 +188,29 @@ function Sidebar({ setMobileMenu, mobileMenu }) {
         <div className="sideber-hr">
           <hr />
         </div>
-        <div className="deatail-content">
-          <h3>Weather Deatail</h3>
-          <ul>
-            <li>
-              <span>Cloudy</span>
-              <span>{weather?.clouds?.all}%</span>
-            </li>
-            <li>
-              <span>Humidity</span>
-              <span>{weather?.main?.humidity}%</span>
-            </li>
-            <li>
-              <span>Wind</span>
-              <span>{weather?.wind?.speed} km/h</span>
-            </li>
-            <li>
-              <span>Pressure</span>
-              <span>{weather?.main?.pressure} Pha</span>
-            </li>
-          </ul>
-        </div>
+        {weather && (
+          <div className="deatail-content">
+            <h3>Weather Deatail</h3>
+            <ul>
+              <li>
+                <span>Cloudy</span>
+                <span>{weather?.clouds?.all}%</span>
+              </li>
+              <li>
+                <span>Humidity</span>
+                <span>{weather?.main?.humidity}%</span>
+              </li>
+              <li>
+                <span>Wind</span>
+                <span>{weather?.wind?.speed} km/h</span>
+              </li>
+              <li>
+                <span>Pressure</span>
+                <span>{weather?.main?.pressure} Pha</span>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </aside>
   );
